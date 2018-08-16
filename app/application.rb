@@ -1,6 +1,6 @@
 class Application
 
-  @@items = [item.new("plums", 0.99)]
+  @@items = [item.new("Figs", 3.42,Item.new("Pears", 0.99)]
 
   def call(env)
     resp = Rack::Response.new
@@ -8,9 +8,8 @@ class Application
 
     if req.path.match(/items/)
        item_name = req.path.split("items/").last
-       item = @@items.find{|i| i.name == item_name}
-       if item
-         resp.write "Price is #{item.price}"
+      if item = @@items.find{|i| i.name == item_name}
+      resp.write item.price
        else
          resp.write "Item not found"
          resp.status = 400
